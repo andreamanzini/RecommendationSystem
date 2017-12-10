@@ -5,7 +5,7 @@ from surprise import Reader, KNNBaseline, BaselineOnly, Dataset, Trainset, SVD, 
 import random
 import itertools
 import pandas as pd
-from surprise_helper import pred_final_BaselineOnly
+from surprise_helper import *
 
 # path to dataset file
 file_path = ('../data/train_formatted.csv')
@@ -17,34 +17,43 @@ data = Dataset.load_from_file(file_path, reader=reader)
 random.seed(10)
 data.split(n_folds=4)  # data can now be used normally
 
-# Set parameters
-bsl_options = { 'method': ['als'],
-                'reg_i': [1.e-5],
-                'reg_u': [14.6],
-                'n_epochs': [10]}
+
 
 #%%
-"""
+
+# Set Grid Parameters
 param_grid = {
-        'bsl_options': bsl_options
+        'bsl_options': { 
+                'method': ['als'],
+                'reg_i': [1.e-5],
+                'reg_u': [14.6],
+                'n_epochs': [10]
+                },
+        
+        'sim_options': {
+                'name': ['pearson_baseline'],
+                'shrinkage': [0,5,10]  # no shrinkage
+                },
+        
+        'k' : [30]
 }
 
-grid_search = GridSearch(BaselineOnly, param_grid, measures=['RMSE'])
+grid_search = GridSearch(KNNBaseline, param_grid, measures=['RMSE'])
 
 # Evaluate performances of our algorithm on the dataset.
 grid_search.evaluate(data)
 
 # Use Panda dataframe to analyze solution
 results_df = pd.DataFrame.from_dict(grid_search.cv_results)
-results_df.to_csv('BaselineOnly_fine.csv')
+results_df.to_csv('../method_reports/KNNBaseline.csv')
 print(results_df)
-"""
-#%%
 
-bsl_options = {'method': 'als',
-               'n_epochs': 1.e-5,
-               'reg_u': 14.6,
-               'reg_i': 10
+#%%
+"""
+bsl_options = { 'method': 'als',
+                'reg_i': 1.e-5,
+                'reg_u': 14.6,
+                'n_epochs': 10
                }
 algo = BaselineOnly(bsl_options=bsl_options)
 rmse_tr = np.zeros(data.n_folds)
@@ -65,24 +74,15 @@ for trainset, testset in data.folds():
 # Compute and print Root Mean Squared Error
 print('Train score: ', np.mean(rmse_tr))
 print('Test Score: ', np.mean(rmse_te))
-
+"""
 #%% Write Final predictions
-bsl_options = {'method': 'als',
-               'n_epochs': 1.e-5,
-               'reg_u': 14.6,
-               'reg_i': 10
+"""
+bsl_options = { 'method': 'als',
+                'reg_i': 1.e-5,
+                'reg_u': 14.6,
+                'n_epochs': 10
                }
 
-pred_final_BaselineOnly(data, bsl_options)
-
-trainset = data.build_full_trainset()
-algo = BaselineOnly(bsl_options=bsl_options)
-algo.train(trainset)
-prediction = algo.test(trainset.build_anti_testset())
-
-for j, pred in enumerate(prediction):
-    print(pred)
-    if j > 20:
-        break
-
-export_predictions(prediction)
+test = import_kaggle_testset('../data/sample_formatted.csv')
+pred_final_BaselineOnly(data, test, bsl_options)
+"""

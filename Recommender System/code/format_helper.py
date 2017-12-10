@@ -22,9 +22,11 @@ def reformat_dataset(path_dataset, path_formatted):
     fp.close()
     
 
-def export_predictions(prediction):
+def export_prediction(prediction):
     """ Export prediction to kaggle format"""
     # Store users, items and ratings in three arrays
+    
+    header = 'Id,Prediction\n'
     
     N = len(prediction)
     users = []
@@ -38,10 +40,11 @@ def export_predictions(prediction):
         
     # Format preditions in the kaggle format
     data = []
+    data.append(header) # Add header at the start of the text file
     for j in range(N):
         data.append('r{u}_c{i},{r}\n'.format(u=users[j], i=items[j], r = rat[j]))
         
     # Write predictions in a csv file
-    fp = open('./final_prediction.csv', 'w')
+    fp = open('../data/final_prediction.csv', 'w')
     fp.writelines(data)
     fp.close()
