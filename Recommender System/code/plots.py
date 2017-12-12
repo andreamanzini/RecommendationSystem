@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 def plot_raw_data(ratings):
     """plot the statistics result on raw rating data."""
     # do statistics.
-    num_items_per_user = np.array((ratings != 0).sum(axis=1)).flatten()
-    num_users_per_item = np.array((ratings != 0).sum(axis=0).T).flatten()
+    num_items_per_user = np.array((ratings != 0).sum(axis=1).T).flatten()
+    num_users_per_item = np.array((ratings != 0).sum(axis=0)).flatten()
     sorted_num_movies_per_user = np.sort(num_items_per_user)[::-1]
     sorted_num_users_per_movie = np.sort(num_users_per_item)[::-1]
 
@@ -25,7 +25,7 @@ def plot_raw_data(ratings):
     ax2.plot(sorted_num_users_per_movie)
     ax2.set_xlabel("items")
     ax2.set_ylabel("number of ratings (sorted)")
-    ax2.set_xticks(np.arange(0, 2000, 300))
+    ax2.set_xticks(np.arange(0, 1000, 300))
     ax2.grid()
 
     plt.tight_layout()

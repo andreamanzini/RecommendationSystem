@@ -7,20 +7,6 @@ import numpy as np
 import scipy.sparse as sp
 import csv 
 
-def create_csv_submission(ids, y_pred, name):
-    """
-    Creates an output file in csv format for submission to kaggle
-    Arguments: ids (event ids associated with each prediction)
-               y_pred (predicted class labels)
-               name (string name of .csv output file to be created)
-    """
-    with open(name, 'w',  newline='') as csvfile:
-        fieldnames = ['Id', 'Prediction']
-        writer = csv.DictWriter(csvfile, delimiter=",", fieldnames=fieldnames)
-        writer.writeheader()
-        for r1, r2 in zip(ids, y_pred):
-            writer.writerow({'Id':int(r1),'Prediction':int(r2)})
-
 def read_txt(path):
     """read text file from path."""
     with open(path, "r") as f:
@@ -87,3 +73,73 @@ def calculate_mse(real_label, prediction):
     """calculate MSE."""
     t = real_label - prediction
     return 1.0 * t.dot(t.T)
+
+
+
+def create_submission(path_to_output, ratings, indices_to_predict):
+    """creates a csv prediction file.
+       Args:
+           path_to_output:
+               path to the prediction file.
+           ratings:
+               NxD matrix where rows represent users and columns represent 
+               movies.
+           indices_to_predict:
+               entries of ratings we want to write to the prediction file 
+               (following the same order of indices_to_predict)
+    """
+    fieldnames = ['Id', 'Prediction']
+   
+    with open(path_to_output, 'w',  newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, delimiter=",", fieldnames=fieldnames)
+        writer.writeheader()
+        for row, col in indices_to_predict:
+            valid_rating = min(max(ratings[row,col],1),5) 
+            id = "r{0}_c{1}".format(row+1,col+1)
+            writer.writerow({'Id': id, 'Prediction': valid_rating})
+
+    
+def split_data(ratings, num_items_per_user, num_users_per_item,
+               min_num_ratings, p_test=0.1):
+    """split the ratings to training data and test data.
+    Args:
+        min_num_ratings: 
+            all users and items we keep must have at least min_num_ratings per user and per item. 
+    """
+    # set seed
+    np.random.seed(988)
+    
+    # select user and item based on the condition.
+    valid_users = np.where(num_items_per_user >= min_num_ratings)[0]
+    valid_items = np.where(num_users_per_item >= min_num_ratings)[0]
+    valid_ratings = ratings[valid_users, :][: , valid_items]  
+    
+    # init
+    num_rows, num_cols = valid_ratings.shape
+    train = sp.lil_matrix((num_rows, num_cols))
+    test = sp.lil_matrix((num_rows, num_cols))
+    
+    print("the shape of original ratings. (# of row, # of col): {}".format(
+        ratings.shape))
+    print("the shape of valid ratings. (# of row, # of col): {}".format(
+        (num_rows, num_cols)))
+
+    nz_users, nz_items = valid_ratings.nonzero()
+    
+    # split the data
+    for user in set(nz_users):
+        # randomly select a subset of ratings
+        row, col = valid_ratings[user, :].nonzero()
+        selects = np.random.choice(col, size=int(len(col) * p_test))
+        residual = list(set(col) - set(selects))
+
+        # add to train set
+        train[user, residual]  = valid_ratings[user, residual]
+
+        # add to test set
+        test[user, selects] = valid_ratings[user, selects]
+
+    print("Total number of nonzero elements in origial data:{v}".format(v=ratings.nnz))
+    print("Total number of nonzero elements in train data:{v}".format(v=train.nnz))
+    print("Total number of nonzero elements in test data:{v}".format(v=test.nnz))
+    return valid_ratings, train, test
