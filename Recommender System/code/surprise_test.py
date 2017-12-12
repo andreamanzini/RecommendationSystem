@@ -15,8 +15,8 @@ file_path = ('../data/train_formatted.csv')
 reader = Reader(line_format='user item rating', sep=',')
 
 data = Dataset.load_from_file(file_path, reader=reader)
-#random.seed(10)
-#data.split(n_folds=4)  # data can now be used normally
+random.seed(10)
+data.split(n_folds=4)  # data can now be used normally
 
 #%% GENERAL PARAMETERS SETTING
 
@@ -96,3 +96,4 @@ min_k = 10
 test = import_kaggle_testset('../data/sample_formatted.csv')
 pred_final_KNNBaseline(data, test, k, min_k, sim_options, bsl_options)
 #%%
+
