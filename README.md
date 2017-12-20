@@ -1,14 +1,35 @@
 # Project Recommender System
 
-For this choice of project task, you are supposed to predict good recommendations, e.g. of movies to users. We have acquired ratings of 10000 users for 1000 different items (think of movies). All ratings are integer values between 1 and 5 stars. No additional information is available on the movies or users.
+####TODO: introduction
 
-### Evaluation Metric
-Your collaborative filtering algorithm is evaluated according to the prediction error, measured by root-mean-squared error (RMSE).
+## Setting up the environment
 
-### Submission system environment setup:
+* Install custom surprise library:
+	* Clone this repository: https://github.com/manzo94/Surprise/tree/integrated_model
+	* Install requirements: pip install -r <folder_of_Surprise>/requirements.txt
+	* Install library:  pip install <folder_of_Surprise>
+	* ####TODO: talk about the requirement to install Visual Studio 2015 compiler if asked (the link should show up if the installation fail)
+	*## Throubleshooting:
+	 ####TODO: if the library can't be installed try to update all the python modules with conda upgrade --all and if it still fails update pip packages (pip install -U <modules<)
 
-1. The dataset is available from the Kaggle page, as linked in the PDF project description
+* Install requirements for the project
+	* Run: pip install -r <folder_of_project>/requirements.txt  
+	  (Use conda install if you prefer)
 
-2. All information of the task and some baselines are provided in Exercise 10:
+* Data Sets:
+    ####TODO: only the kaggle files are needed. Put them in ../data (with respect to the code folder)
+	
+## Description
 
- [https://github.com/epfml/ML_course/tree/master/labs/ex10]
+* Files ####TODO:
+     * run.py is the main code which generates dumps (if not already generated) and the final prediction file
+     * models.py contains all the models used in the blending. Both custom and Surprise models are there
+     * *_helpers are all the helper. The description is inside the files. Take a look there add stuff here
+
+	 
+## Performances
+	####TODO: add final score on Kaggle and position in the leaderboard. Add the table with computation time for algorithms
+	
+
+ 
+

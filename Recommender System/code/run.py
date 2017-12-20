@@ -38,7 +38,6 @@ from models import (global_mean, user_mean, item_mean, user_median,
                     item_median, matrix_factorization_SGD,
                     matrix_factorization_ALS, slope_one, svd, knn_user,
                     knn_item, baseline, svdpp)
-from time import time
 
 #%% IMPORT DATA
 
