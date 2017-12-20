@@ -3,6 +3,51 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy
+
+def plot_traintest_over_factors(factors_list, tot_rmse_tr, tot_rmse_te, filepath):
+    """ Plot test and train RMSE over factors in a smooth graph """
+    # Interpolate results for smoother graph
+    interval = factors_list[1]-factors_list[0]
+    interp_tr = scipy.interpolate.interp1d(factors_list, tot_rmse_tr, kind='cubic')
+    interp_te = scipy.interpolate.interp1d(factors_list, tot_rmse_te, kind='cubic')
+    x_smooth = np.arange(factors_list[0], factors_list[-1]+1)
+    plt.plot(x_smooth, interp_tr(x_smooth), '.-', x_smooth, interp_te(x_smooth), '.-', markevery=interval);
+    plt.title('SVD over different numbers of factors');
+    plt.xticks(np.arange(0,factors_list[-1]+1,interval))
+    plt.xlabel('N Factors');
+    plt.ylabel('RMSE');
+    plt.legend(['train','test']);
+    plt.grid()
+    plt.savefig(filepath);
+    
+def plot_train_over_factors(factors_list, tot_rmse_tr, filepath):
+    """ Plot train RMSE over factors in a smooth graph """
+    # Interpolate results for smoother graph
+    interval = factors_list[1]-factors_list[0]
+    interp_tr = scipy.interpolate.interp1d(factors_list, tot_rmse_tr, kind='cubic')
+    x_smooth = np.arange(factors_list[0], factors_list[-1]+1)
+    plt.plot(x_smooth, interp_tr(x_smooth), '.-', x_smooth, markevery=interval);
+    plt.title('SVD over different numbers of factors (train)');
+    plt.xticks(np.arange(0,factors_list[-1]+1,interval))
+    plt.xlabel('N Factors');
+    plt.ylabel('RMSE Train');
+    plt.grid()
+    plt.savefig(filepath);
+    
+def plot_test_over_factors(factors_list, tot_rmse_te, filepath):
+    """ Plot test RMSE over factors in a smooth graph """
+    # Interpolate results for smoother graph
+    interval = factors_list[1]-factors_list[0]
+    interp_te = scipy.interpolate.interp1d(factors_list, tot_rmse_te, kind='cubic')
+    x_smooth = np.arange(factors_list[0], factors_list[-1]+1)
+    plt.plot(x_smooth, interp_te(x_smooth), '.-', x_smooth, markevery=interval);
+    plt.title('SVD over different numbers of factors (test)');
+    plt.xticks(np.arange(0,factors_list[-1]+1,interval))
+    plt.xlabel('N Factors');
+    plt.ylabel('RMSE Test');
+    plt.grid()
+    plt.savefig(filepath);
 
 
 def plot_raw_data(ratings):

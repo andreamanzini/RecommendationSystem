@@ -445,10 +445,10 @@ def slope_one(trainset, testset, predset):
     algo.train(trainset)
     
     predictions = algo.test(trainset.build_testset())
-    print('   RMSE on Train: ', accuracy.rmse(predictions))
+    print('   RMSE on Train: ', accuracy.rmse(predictions, verbose=False))
     
     predictions = algo.test(testset)
-    rmse = accuracy.rmse(predictions)
+    rmse = accuracy.rmse(predictions, verbose=False)
     print('   RMSE on Test: ', rmse)
     preds = np.zeros(len(predictions))
     for j, pred in enumerate(predictions):
@@ -474,10 +474,10 @@ def svd(trainset, testset, predset):
     algo.train(trainset)
     
     predictions = algo.test(trainset.build_testset())
-    print('   RMSE on Train: ', accuracy.rmse(predictions))
+    print('   RMSE on Train: ', accuracy.rmse(predictions, verbose=False))
     
     predictions = algo.test(testset)
-    rmse = accuracy.rmse(predictions)
+    rmse = accuracy.rmse(predictions, verbose=False)
     print('   RMSE on Test: ', rmse)
     preds = np.zeros(len(predictions))
     for j, pred in enumerate(predictions):
@@ -510,10 +510,10 @@ def baseline(trainset, testset, predset):
     algo.train(trainset)
     
     predictions = algo.test(trainset.build_testset())
-    print('   RMSE on Train: ', accuracy.rmse(predictions))
+    print('   RMSE on Train: ', accuracy.rmse(predictions, verbose=False))
     
     predictions = algo.test(testset)
-    rmse = accuracy.rmse(predictions)
+    rmse = accuracy.rmse(predictions, verbose=False)
     print('   RMSE on Test: ', rmse)
     preds = np.zeros(len(predictions))
     for j, pred in enumerate(predictions):
@@ -549,7 +549,7 @@ def knn_user(trainset, testset, predset):
     algo.train(trainset)
     
     predictions = algo.test(testset)
-    rmse = accuracy.rmse(predictions)
+    rmse = accuracy.rmse(predictions, verbose=False)
     print('   RMSE on Test: ', rmse)
     preds = np.zeros(len(predictions))
     for j, pred in enumerate(predictions):
@@ -586,7 +586,7 @@ def knn_item(trainset, testset, predset):
     algo.train(trainset)
     
     predictions = algo.test(testset)
-    rmse = accuracy.rmse(predictions)
+    rmse = accuracy.rmse(predictions, verbose=False)
     print('   RMSE on Test: ', rmse)
     preds = np.zeros(len(predictions))
     for j, pred in enumerate(predictions):
@@ -619,10 +619,10 @@ def svdpp(trainset, testset, predset):
     algo.train(trainset)
     
     predictions = algo.test(trainset.build_testset())
-    print('   RMSE on Train: ', accuracy.rmse(predictions))
+    print('   RMSE on Train: ', accuracy.rmse(predictions, verbose=False))
     
     predictions = algo.test(testset)
-    rmse = accuracy.rmse(predictions)
+    rmse = accuracy.rmse(predictions, verbose=False)
     print('   RMSE on Test: ', rmse)
     preds = np.zeros(len(predictions))
     for j, pred in enumerate(predictions):

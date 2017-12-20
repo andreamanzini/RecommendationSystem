@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import pandas as pd
-import random
-from suprise import *
-from format_helper import *
-
-
 """
 Other helper functions used during the development of the project
     
@@ -13,6 +7,50 @@ Created on Tue Dec 19 2017
 
 @author: Andrea Manzini, Lorenzo Lazzara, Farah Charab
 """
+
+import numpy as np
+import pandas as pd
+import random
+from suprise import SVD, accuracy, KNNBaseline, BaselineOnly, print_perf, evaluate
+from format_helper import export_prediction
+from plots import plot_traintest_over_factors, plot_train_over_factors, plot_test_over_factors
+from tqdm import tqdm
+
+def produce_svd_factors_plot(data):
+    factors_list = np.arange(10,140,10)
+    tot_rmse_tr = []
+    tot_rmse_te = []
+    for n_factors in factors_list:
+        algo = SVD(n_factors=n_factors, n_epochs=30, lr_bu=0.01, lr_bi=0.01, lr_pu=0.1, lr_qi=0.1, reg_bu=0.05, reg_bi=0.05, reg_pu=0.09, reg_qi=0.1)
+        rmse_tr = np.zeros(data.n_folds)
+        rmse_te = np.zeros(data.n_folds)
+        for i, (trainset, testset) in enumerate(tqdm(data.folds())):
+        
+            # train and test algorithm.
+            algo.train(trainset)
+            train_pred = algo.test(trainset.build_testset())
+            test_pred = algo.test(testset)
+            
+            rmse_tr[i] = accuracy.rmse(train_pred, verbose=False)
+            rmse_te[i] = accuracy.rmse(test_pred, verbose=False)
+        
+        # Compute and print Root Mean Squared Error
+        rmse_tr_mean = np.mean(rmse_tr)
+        rmse_te_mean = np.mean(rmse_te)
+        print('Factor: ', n_factors)
+        print('   Train score: ', rmse_tr_mean)
+        print('   Test Score: ', rmse_te_mean)
+        
+        # Store the rmse on train and test of this n_factors
+        tot_rmse_tr.append(rmse_tr_mean)
+        tot_rmse_te.append(rmse_te_mean)
+        
+    # Plot and sasve figures
+    plot_traintest_over_factors(factors_list, tot_rmse_tr, tot_rmse_te, '../figures/SVD_over_factors.png')
+    plot_train_over_factors(factors_list, tot_rmse_tr, tot_rmse_te, '../figures/SVD_over_factors_train.png')
+    plot_test_over_factors(factors_list, tot_rmse_tr, tot_rmse_te, '../figures/SVD_over_factors_test.png')
+        
+    
 
 def pred_final_BaselineOnly(data, test, bsl_options):
     """ Find prediction for BaselineOnly method using entire trainset

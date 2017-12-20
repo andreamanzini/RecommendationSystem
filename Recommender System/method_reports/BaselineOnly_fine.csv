@@ -1,2 +1,0 @@
-,RMSE,bsl_options,params,scores
-0,0.9994599419558978,"{'method': 'als', 'reg_i': 1e-05, 'reg_u': 14.6, 'n_epochs': 20}","{'bsl_options': {'method': 'als', 'reg_i': 1e-05, 'reg_u': 14.6, 'n_epochs': 20}}",{'RMSE': 0.99945994195589782}
