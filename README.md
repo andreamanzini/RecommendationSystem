@@ -4,12 +4,12 @@ We study the problem of recommending items to users using a collaborative-based 
 movies by predicting the missing ratings. To this end, we
 implement 16 different models. A modified version of Singular
 Value Decomposition (SVD++) performs the best among these
-models. It achieves a score of 0:97738 on Kaggleâ€™s validation set. 
+models. It achieves a score of 0.97738 on Kaggle’s validation set. 
 In order to improve our predictions even further, we
 implement a ridge regression model that predicts ratings based
 on the predictions of 13 different models. We obtain a slight
 improvement over SVD++, increasing our accuracy score to
-0.97368 on Kaggleâ€™s validation set. 
+0.97368 on Kaggle’s validation set. 
 
 ## Setting up the environment
 
