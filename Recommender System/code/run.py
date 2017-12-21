@@ -19,10 +19,12 @@ Each model function creates a dump of the predictions and during the blending
 all the predictions are collected again from the files. Default location for
 the dump are: ../predictions and ../test
 
-The code takes approximately 4 hours on a Intel i7 6700HQ. The algorithms are
+The code takes approximately 4 hours on a Intel i7 6700HQ when executed from 
+scratch (no pickle dump provided) and less than 2 minutes when all the 
+model predictions have already been dumped (only blending). The algorithms are
 not parallelized, so only a fraction of the total computational power of the
-CPU is used. The RAM usage is always lower than 4GB, so it should work
-perfectly on a 8GB system.
+CPU is used. No GPU is required since it is not exploited. The RAM usage is 
+always lower than 4GB. In our tests, the code ran perfectly on a 8GB system.
 
 Created on Tue Dec 19 2017
 
@@ -62,8 +64,6 @@ predset = import_kaggle_testset(path_samplesub)
 #%% GENERATE PREDICTION OF RECOMMENDATION MODELS
 
 print('GENERATE PREDICTIONS...', end='\n\n')
-
-t = time()
 
 global_mean(trainset, testset, predset)
 user_mean(trainset, testset, predset)

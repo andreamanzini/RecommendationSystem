@@ -151,7 +151,8 @@ def generate_submission(predicted_ratings, trainset, predset):
         data.append('r{u}_c{i},{r}\n'.format(u=users[j], i=items[j], r = rat[j]))
         
     # Write predictions in a csv file
-    fp = open('./final_prediction.csv', 'w')
+    path = os.path.join('..','data','final_prediction.csv')
+    fp = open(path, 'w')
     fp.writelines(data)
     fp.close()
 
