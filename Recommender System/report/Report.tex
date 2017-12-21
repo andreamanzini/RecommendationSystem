@@ -125,7 +125,7 @@ The prediction $\hat{r}_{ui}$ is set as follows.
 \end{equation}
 where $R_{i}(u)$ is the set of relevant items. The set of relevant items is the set of items $j$ rated by user $u$ that have at least one common user with item $i$, and $dev(i,j)$ is defined as the average difference between the ratings of $i$ and those of $j$. That is,
 \begin{equation}
-dev(i, j) = \frac{1}{|U_{ij}|} \sum_{u \in U_{ij}}{} r_{ui} - r_{uj}
+dev(i, j) = \frac{1}{|U_{ij}|} \sum_{u \in U_{ij}}{} (r_{ui} - r_{uj})
 \end{equation}
 This algorithm is implemented in the Python Surprise library ~\cite{Surprise}.
 \subsection{Blending}\label{section::blending}
