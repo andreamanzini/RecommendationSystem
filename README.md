@@ -8,23 +8,27 @@
 	* Clone this repository: https://github.com/manzo94/Surprise/tree/integrated_model
 	* Install requirements: pip install -r <folder_of_Surprise>/requirements.txt
 	* Install library:  pip install <folder_of_Surprise>
-	* ####TODO: talk about the requirement to install Visual Studio 2015 compiler if asked (the link should show up if the installation fail)
-	*## Throubleshooting:
-	 ####TODO: if the library can't be installed try to update all the python modules with conda upgrade --all and if it still fails update pip packages (pip install -U <modules<)
+	* ### Throubleshooting:
+		* The library may ask the installation of the Visual Studio 2015 compiler.
+		  If asked follow the link which shows up in the error message and install the software.
+	    * If the library can't be installed try to update all the python modules with 
+		  "conda upgrade --all" and "pip install -U <modules>"
 
 * Install requirements for the project
 	* Run: pip install -r <folder_of_project>/requirements.txt  
-	  (Use conda install if you prefer)
+	  (Install required modules using conda if you prefer)
 
 * Data Sets:
-    ####TODO: only the kaggle files are needed. Put them in ../data (with respect to the code folder)
+    * Download the data_train.csv and sample_submission.csv files from the competition page on kaggle.
+	  (https://www.kaggle.com/c/epfml17-rec-sys). The files should be put in the folder ../data, with
+	  respect to the code folder.
 	
 ## Description
 
-* Files ####TODO:
-     * run.py is the main code which generates dumps (if not already generated) and the final prediction file
-     * models.py contains all the models used in the blending. Both custom and Surprise models are there
-     * *_helpers are all the helper. The description is inside the files. Take a look there add stuff here
+* Files:
+     * run.py is the main code which generates dumps (if not already generated) and the final predictions file (after the blending)
+     * models.py contains all the models used in the blending. Both custom and Surprise models are included in this file.
+     * *_helpers are files which contain helper functions. The description is inside the files. Take a look there add stuff here
 
 	 
 ## Performances
