@@ -13,6 +13,8 @@ improvement over SVD++, increasing our accuracy score to
 
 ## Setting up the environment
 
+* Install a python environment. For all our tests, anaconda environment was used.
+
 * Install custom surprise library:
 	* Clone this repository: https://github.com/manzo94/Surprise/tree/integrated_model
 	* Install requirements: pip install -r <path_of_Surprise_folder>/requirements.txt
@@ -33,16 +35,16 @@ improvement over SVD++, increasing our accuracy score to
 	  (https://www.kaggle.com/c/epfml17-rec-sys). The files should be put in the folder ../data, with
 	  respect to the code folder.
 	
-## Description
+## Description of files
 
-* Files:
-     * run.py is the main code which generates dumps (if not already generated) and the final predictions file (after the blending)
-     * models.py contains all the models used in the blending. Both custom and Surprise models are included in this file.
-	   Each model function creates a pickle dump of the predictions and during the blending all the predictions are collected again from the dump files. Default location for the dumps are: ../predictions and ../test. The folders are automatically created if missing.
-     * *_helpers are files which contain helper functions. The description is inside the files. Take a look there add stuff here
+	 * run.py is the main code which generates dumps (if not already generated) and the final prediction file (after the blending). If you want to reproduce all the predictions of the model, you need to remove "predictions" and "test" folders.
+	 * models.py contains all the models used in the blending. Both custom and Surprise models are included in this file.
+	   Each model function creates a pickle dump of the predictions and during the blending all the predictions are collected again from the dump files. The parameters of the models are hardcoded in their respective functions. Default path of the dumps are: ../predictions and ../test. The folders are automatically created if missing.
+	 * *_helpers are files which contain helper functions. The description of each function is inside the files.
+	 * plot.py contains functions to plot some of the graphs in the figure folder.
 
-	 
 ## Performances
+	When run.py is run, it automatically create a kaggle submission in the data folder called "final_submission.csv". It scores 0.97368 on the Kaggle public leaderboard.
 
 	The code takes approximately 4 hours on a Intel i7 6700HQ when executed from scratch (no pickle dump provided) and less than 2 minutes when all the model predictions have already been dumped (only blending). The algorithms are not parallelized, so only a fraction of the total computational power of the	CPU is used. No GPU is required since it is not exploited. The RAM usage is always lower than 4GB. In our tests, the code ran perfectly on a 8GB system.
 	
