@@ -147,15 +147,16 @@ Two other completely custom algorithms have been implemented in the Surprise fra
 This model was proposed by Bell and Koren during the Netflix Prize \cite{koren2008factorization, koren2010factor}. It avoids using a specific similarity measure which could affect the ratings in an unnatural way. On the contrary, it lets the algorithm learn the weights with SGD and introduces new biases, learnt during the iterations, which respond to the new scale of the weights. The function that estimates the prediction is the following.
 \begin{align}
 \hat{r}_{ui} = \mu + b_{u} + b_{i} &+ \nonumber\\
-&|R^{k}(i;u)|^{-\frac{1}{2}} \sum_{j \in R^{k}(i;u) }(r_{uj}-b_{uj})w_{ij} + c_{ij}  
+&|R^{k}(i;u)|^{-\frac{1}{2}} \sum_{j \in R^{k}(i;u) }((r_{uj}-b_{uj})w_{ij} + c_{ij})
 \end{align}
 where $\mu$ is the global mean, $b_{uj}$ are the baseline estimations computed with the BaselineOnly algorithm, $b_{u}$, $b_{i}$, $w_{ij}$, $c_{ij}$ are learnt with simple SGD over the regularized quadratic error (see \cite{koren2008factorization,koren2010factor} for more details), $w_{ij}$ corresponds to the weights assigned to the neighbors ratings and $c_{ij}$ takes care of the implicit ratings.
 \subsection{Factorized Neighborhood}
 This model is an extension of the Weighted Neighborhood which also includes the matrix factorization estimation \cite{koren2008factorization}. It somehow corresponds to a blending, but it is done directly during the learning, so it should be more powerful. The parameters are learnt using the linear SGD proposed in the paper, which tries to minimize the regularized quadratic error. The estimations are given by
 \begin{align}
 \hat{r}_{ui} &= \mu + b_{u} + b_{i} + q_{i}^{T}(p_{u} + |R(u)|^{-\frac{1}{2}} \sum_{j \in R(u)}y_{j}) \nonumber \\
-&+ |R^{k}(i;u)|^{-\frac{1}{2}} \sum_{j \in R^{k}(i;u)} (r_{uj}-b_{uj})w_{ij} + c_{ij} 
+&+ |R^{k}(i;u)|^{-\frac{1}{2}} \sum_{j \in R^{k}(i;u)} ((r_{uj}-b_{uj})w_{ij} + c_{ij} )
 \end{align}
+where $q_{i}$'s and $p_{u}$'s are the item and user factors usually computed by the SVD algorithm. \\
 Since this algorithm is computationally very heavy, efforts were made in order to optimize the code. The most important step in this direction was achieved using the Cython compiler. \footnotetext{Cython is an optimizing static compiler for both the Python programming language and the extended Cython programming language (based on Pyrex). The Cython language is very close to the Python language, but Cython additionally supports calling C functions and declaring C types on variables and class attributes.  This allows the compiler to generate very efficient C code from Cython code(http://cython.org/).} In order to make the compiler produce an efficient C code, we tried to observe (as much as possible) some rules while writing the functions critic for the computation time:
 \begin{itemize}
 \item For the variables we used Cython fixed types instead of Python dynamic types.
