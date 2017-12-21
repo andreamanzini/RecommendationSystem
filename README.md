@@ -1,6 +1,15 @@
 # Project Recommender System
 
-####TODO: introduction
+We study the problem of recommending items to users using a collaborative-based filtering approach. In particular, we are  given access to 10000 users and 1000 movies, and a subset of their ratings, and we would like to recommend new
+movies by predicting the missing ratings. To this end, we
+implement 16 different models. A modified version of Singular
+Value Decomposition (SVD++) performs the best among these
+models. It achieves a score of 0:97738 on Kaggle’s validation set. 
+In order to improve our predictions even further, we
+implement a ridge regression model that predicts ratings based
+on the predictions of 13 different models. We obtain a slight
+improvement over SVD++, increasing our accuracy score to
+0.97368 on Kaggle’s validation set. 
 
 ## Setting up the environment
 
