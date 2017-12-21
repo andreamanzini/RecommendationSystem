@@ -6,8 +6,8 @@ This file contains all the models used for recommendation. They are divided in:
                     matrix_factorization_SGD, matrix_factorization_ALS
     Surprise models: slope_one, baseline, KNN_user, KNN_items, svd, svdpp
     
-These are the minutes they take on a Intel i7 6700HQ, 8Gb RAM with data slitted
-in 90% training, 10% testing. The models not listed take less than 1 minute.
+These are the minutes they take on a Intel i7 6700HQ, 8Gb RAM with data splitted
+in 93.3% training, 6.7% testing. The models not listed take less than 1 minute.
     matrix_factorization_SGD : 13
     matrix_factorization_ALS : 13
     KNN_user                 : 50
