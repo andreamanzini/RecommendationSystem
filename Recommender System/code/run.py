@@ -63,8 +63,6 @@ predset = import_kaggle_testset(path_samplesub)
 
 print('GENERATE PREDICTIONS...', end='\n\n')
 
-t = time()
-
 global_mean(trainset, testset, predset)
 user_mean(trainset, testset, predset)
 item_mean(trainset, testset, predset)
