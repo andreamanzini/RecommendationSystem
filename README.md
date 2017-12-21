@@ -26,13 +26,12 @@
 	  (https://www.kaggle.com/c/epfml17-rec-sys). The files should be put in the folder ../data, with
 	  respect to the code folder.
 	
-## Description
+## Description of files
 
-* Files:
-     * run.py is the main code which generates dumps (if not already generated) and the final prediction file (after the blending)
-     * models.py contains all the models used in the blending. Both custom and Surprise models are included in this file.
-	   Each model function creates a pickle dump of the predictions and during the blending all the predictions are collected again from the dump files. Default location for the dumps are: ../predictions and ../test. The folders are automatically created if missing.
-     * *_helpers are files which contain helper functions. The description of each function is inside the files.
+	 * run.py is the main code which generates dumps (if not already generated) and the final prediction file (after the blending). If you want to reproduce all the predictions of the model, you need to remove "predictions" and "test" folders.
+	 * models.py contains all the models used in the blending. Both custom and Surprise models are included in this file.
+	   Each model function creates a pickle dump of the predictions and during the blending all the predictions are collected again from the dump files. The parameters of the models are hardcoded in their respective functions. Default path of the dumps are: ../predictions and ../test. The folders are automatically created if missing.
+	 * *_helpers are files which contain helper functions. The description of each function is inside the files.
 	 * plot.py contains functions to plot some of the graphs in the figure folder.
 
 ## Performances
