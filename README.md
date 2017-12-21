@@ -44,7 +44,6 @@ improvement over SVD++, increasing our accuracy score to
 		├───data
 		├───figures
 		├───predictions
-		├───report
 		└───test
 	
 ## Description of files
