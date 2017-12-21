@@ -34,6 +34,18 @@ improvement over SVD++, increasing our accuracy score to
     * Download the data_train.csv and sample_submission.csv files from the competition page on kaggle.
 	  (https://www.kaggle.com/c/epfml17-rec-sys). The files should be put in the folder ../data, with
 	  respect to the code folder.
+	  
+* Download of dumps of predictions
+	* In order to speed up the code we provide a pickle dump of all the models used for the blending. The folders containing the dumps can be downloaded from Switch Drive at the link: https://drive.switch.ch/index.php/s/1zqfWRX7Xbgsybn.
+	The folders "predictions" and "test" should be put in the main folder. At the end the tree of folders should be as we show here:
+	
+	───Recommender System
+		├───code
+		├───data
+		├───figures
+		├───predictions
+		├───report
+		└───test
 	
 ## Description of files
 
@@ -44,7 +56,7 @@ improvement over SVD++, increasing our accuracy score to
 	 * plot.py contains functions to plot some of the graphs in the figure folder.
 
 ## Performances
-	When run.py is run, it automatically create a kaggle submission in the data folder called "final_submission.csv". It scores 0.97368 on the Kaggle public leaderboard.
+	When run.py is run, it automatically create a kaggle submission in the data folder called "final_submission.csv". It is the one which scores 0.97368 on the Kaggle public leaderboard.
 
 	The code takes approximately 4 hours on a Intel i7 6700HQ when executed from scratch (no pickle dump provided) and less than 2 minutes when all the model predictions have already been dumped (only blending). The algorithms are not parallelized, so only a fraction of the total computational power of the	CPU is used. No GPU is required since it is not exploited. The RAM usage is always lower than 4GB. In our tests, the code ran perfectly on a 8GB system.
 	
