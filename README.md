@@ -13,6 +13,7 @@
 		  If asked follow the link which shows up in the error message and install the software.
 	    * If the library can't be installed try to update all the python modules with 
 		  "conda upgrade --all" and "pip install -U <modules>"
+        * If you are using a mac laptop, make sure to you have xcode downloaded. Also, command line tools should be installed (you can install them by running xcode-select --install). Note that command line tools should be up to date.
 
 * Install requirements for the project
 	* Run: pip install -r <folder_of_project>/requirements.txt  
