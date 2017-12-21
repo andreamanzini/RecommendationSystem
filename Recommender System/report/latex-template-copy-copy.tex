@@ -1,0 +1,24 @@
+\documentclass[10pt,conference,compsocconf]{IEEEtran}
+
+\usepackage{hyperref}
+\usepackage{graphicx}	% For figure environment
+\usepackage{comment}
+
+\begin{document}
+\title{TITLE}
+
+\author{
+  Name1, Name2, Name3\\
+  \textit{Department of Computer Science, ETH Zurich, Switzerland}
+}
+
+\maketitle
+
+\begin{abstract}
+	In this work, we study the problem of recommending items to users using a collaborative-based filtering approach. In particular, we are only given access to users and their ratings, and we would like to recommend new movies by predicting the missing ratings. To this end, we implement and test 30 different models. [SVD??] performs the best among these models. It achieves an  RMSE of ?? when using a (4??)-fold cross validation on our training data set, and a score of ?? on Kaggle's validation set. In order to improve our predictions, we implement a linear regression model that predicts ratings based on the 30 different models we implemented. We obtain a slight improvement over SVD, increasing our accuracy score to an RMSE of ?? when using a (4??)-fold cross validation on our training data set, and a score of ?? on Kaggle's validation set. Finally, we explore [talk briefly about the paper Andrea worked on.]
+\end{abstract}
+\keywords {Recommendation, Collaborative-Based Filtering, Matrix Factorization, Linear Regression, SVD, KNN, Baseline. }
+
+\section{Introduction}
+Recommendation systems have became increasingly popular in recent years and have changed the way users interact with inanimate websites and applications. They are used in a variety of domains including (but not limited to) recommending movies, music, articles, search queries, and products/services in general. Recommendation systems can be broadly divided into three categories: Collaborative-Based Systems, Content-Based Systems, and a hybrid of both. Content-based system examine the properties of the items and the user's preferences. On the other hand, Collaborative-based filtering approaches are based on collecting and analyzing a large amount of information on users? behaviors, activities or preferences and predicting what users will like based on their similarity to other users. In this work, we are given no access to any content information. Thus, we will stick to Collaborative based filtering. An important note to make is here is that in real life scenarios one would be able to provide better recommendations if one was given content data or some additional features such as timestamps of ratings as preferences might vary over time.
+\end{document}
