@@ -39,12 +39,12 @@ improvement over SVD++, increasing our accuracy score to
 	* In order to speed up the code we provide a pickle dump of all the models used for the blending. The folders containing the dumps can be downloaded from Switch Drive at the link: https://drive.switch.ch/index.php/s/1zqfWRX7Xbgsybn.
 	The folders "predictions" and "test" should be put in the main folder. At the end the tree of folders should be as we show here:
 	
-	-----Recommender System  
-		--code  
-		--data  
-		--figures  
-		--predictions  
-		--test  
+	--Recommender System  
+	-------code  
+	-------data  
+	-------figures  
+	-------predictions  
+	-------test  
 	
 ## Description of files
 
@@ -61,13 +61,13 @@ When run.py is run, it automatically create a kaggle submission in the data fold
 The code takes approximately 4 hours on a Intel i7 6700HQ when executed from scratch (no pickle dump provided) and less than 2 minutes when all the model predictions have already been dumped (only blending). The algorithms are not parallelized, so only a fraction of the total computational power of the	CPU is used. No GPU is required since it is not exploited. The RAM usage is always lower than 4GB. In our tests, the code ran perfectly on a 8GB system.
 	
 These are the minutes the models take separately with data splitted in 93.3% training, 6.7% testing. The models not listed take less than 1 minute.
-    matrix_factorization_SGD : 13
-    matrix_factorization_ALS : 13
-    KNN_user                 : 50
-    KNN_item                 : 5
-    slope_one                : 4
-    svdpp                    : 3
-    svdpp                    : 140
+    matrix_factorization_SGD : 13  
+    matrix_factorization_ALS : 13  
+    KNN_user                 : 50  
+    KNN_item                 : 5  
+    slope_one                : 4  
+    svdpp                    : 3  
+    svdpp                    : 140  
 	
 
  
