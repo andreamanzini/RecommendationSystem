@@ -60,7 +60,8 @@ When run.py is run, it automatically create a kaggle submission in the data fold
 
 The code takes approximately 4 hours on a Intel i7 6700HQ when executed from scratch (no pickle dump provided) and less than 2 minutes when all the model predictions have already been dumped (only blending). The algorithms are not parallelized, so only a fraction of the total computational power of the	CPU is used. No GPU is required since it is not exploited. The RAM usage is always lower than 4GB. In our tests, the code ran perfectly on a 8GB system.
 	
-These are the minutes the models take separately with data splitted in 93.3% training, 6.7% testing. The models not listed take less than 1 minute.
+These are the minutes the models take separately with data splitted in 93.3% training, 6.7% testing. The models not listed take less than 1 minute.  
+
     matrix_factorization_SGD : 13  
     matrix_factorization_ALS : 13  
     KNN_user                 : 50  
