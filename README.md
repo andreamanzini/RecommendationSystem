@@ -4,12 +4,12 @@ We study the problem of recommending items to users using a collaborative-based 
 movies by predicting the missing ratings. To this end, we
 implement 16 different models. A modified version of Singular
 Value Decomposition (SVD++) performs the best among these
-models. It achieves a score of 0.97738 on Kaggle�s validation set. 
+models. It achieves a score of 0.97738 on Kaggle’s validation set. 
 In order to improve our predictions even further, we
 implement a ridge regression model that predicts ratings based
 on the predictions of 13 different models. We obtain a slight
 improvement over SVD++, increasing our accuracy score to
-0.97368 on Kaggle�s validation set. 
+0.97368 on Kaggle’s validation set. 
 
 ## Setting up the environment
 
@@ -39,12 +39,12 @@ improvement over SVD++, increasing our accuracy score to
 	* In order to speed up the code we provide a pickle dump of all the models used for the blending. The folders containing the dumps can be downloaded from Switch Drive at the link: https://drive.switch.ch/index.php/s/1zqfWRX7Xbgsybn.
 	The folders "predictions" and "test" should be put in the main folder. At the end the tree of folders should be as we show here:
 	
-	───Recommender System
-		├───code
-		├───data
-		├───figures
-		├───predictions
-		└───test
+	-----Recommender System
+		--code
+		--data
+		--figures
+		--predictions
+		--test
 	
 ## Description of files
 
