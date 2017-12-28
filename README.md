@@ -39,27 +39,28 @@ improvement over SVD++, increasing our accuracy score to
 	* In order to speed up the code we provide a pickle dump of all the models used for the blending. The folders containing the dumps can be downloaded from Switch Drive at the link: https://drive.switch.ch/index.php/s/1zqfWRX7Xbgsybn.
 	The folders "predictions" and "test" should be put in the main folder. At the end the tree of folders should be as we show here:
 	
-	-----Recommender System
-		--code
-		--data
-		--figures
-		--predictions
-		--test
+	-----Recommender System  
+		--code  
+		--data  
+		--figures  
+		--predictions  
+		--test  
 	
 ## Description of files
 
-	 * run.py is the main code which generates dumps (if not already generated) and the final prediction file (after the blending). If you want to reproduce all the predictions of the model, you need to remove "predictions" and "test" folders.
-	 * models.py contains all the models used in the blending. Both custom and Surprise models are included in this file.
-	   Each model function creates a pickle dump of the predictions and during the blending all the predictions are collected again from the dump files. The parameters of the models are hardcoded in their respective functions. Default path of the dumps are: ../predictions and ../test. The folders are automatically created if missing.
-	 * *_helpers are files which contain helper functions. The description of each function is inside the files.
-	 * plot.py contains functions to plot some of the graphs in the figure folder.
+* run.py is the main code which generates dumps (if not already generated) and the final prediction file (after the blending). If you want to reproduce all the predictions of the model, you need to remove "predictions" and "test" folders.
+* models.py contains all the models used in the blending. Both custom and Surprise models are included in this file.
+Each model function creates a pickle dump of the predictions and during the blending all the predictions are collected again from the dump files. The parameters of the models are hardcoded in their respective functions. Default path of the dumps are: ../predictions and ../test. The folders are automatically created if missing.
+* *_helpers are files which contain helper functions. The description of each function is inside the files.
+* plot.py contains functions to plot some of the graphs in the figure folder.
 
 ## Performances
-	When run.py is run, it automatically create a kaggle submission in the data folder called "final_submission.csv". It is the one which scores 0.97368 on the Kaggle public leaderboard.
 
-	The code takes approximately 4 hours on a Intel i7 6700HQ when executed from scratch (no pickle dump provided) and less than 2 minutes when all the model predictions have already been dumped (only blending). The algorithms are not parallelized, so only a fraction of the total computational power of the	CPU is used. No GPU is required since it is not exploited. The RAM usage is always lower than 4GB. In our tests, the code ran perfectly on a 8GB system.
+When run.py is run, it automatically create a kaggle submission in the data folder called "final_submission.csv". It is the one which scores 0.97368 on the Kaggle public leaderboard.
+
+The code takes approximately 4 hours on a Intel i7 6700HQ when executed from scratch (no pickle dump provided) and less than 2 minutes when all the model predictions have already been dumped (only blending). The algorithms are not parallelized, so only a fraction of the total computational power of the	CPU is used. No GPU is required since it is not exploited. The RAM usage is always lower than 4GB. In our tests, the code ran perfectly on a 8GB system.
 	
-	These are the minutes the models take separately with data splitted in 93.3% training, 6.7% testing. The models not listed take less than 1 minute.
+These are the minutes the models take separately with data splitted in 93.3% training, 6.7% testing. The models not listed take less than 1 minute.
     matrix_factorization_SGD : 13
     matrix_factorization_ALS : 13
     KNN_user                 : 50
